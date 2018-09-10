@@ -1,7 +1,7 @@
 # Identification and characterization of cryptic human-specific LINE-1 insertions using long-read sequencing technology
 ## BLASR
 ```
-#for PacBio raw read from University of Washington
+#for PacBio raw read from Washington University
 blasr ./SRR_hdf5/SRR.fofn hs37d5.fa -sa hs37d5.blasr.sa -clipping soft -sam -out SRR.sam
 
 #for alignment of error corrected reads
