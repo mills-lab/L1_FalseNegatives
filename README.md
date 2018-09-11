@@ -24,7 +24,7 @@ java -jar ./MELTv2.0.2/MELT.jar Single -l 82759.bam -w /workdir -t ./MELTv2.0.2/
 
 ## jellyFish
 ```
-#for estbliashing 26mers index
+#for establishing 26mers index
 jellyfish count -m 26 -s 5G -t 10 -o jf.index.26kmers <(zcat ./ERR194147_1.fastq.gz) <(zcat ./ERR194147_2.fastq.gz) <(zcat ./ERR194147.fastq.gz)
 
 
