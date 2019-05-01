@@ -1,7 +1,7 @@
 # Identification and Characterization of Occult Human-specific LINE-1 Insertions using Long-read Sequencing Technology
 ## BLASR
 ```
-#for PacBio raw read from Washington University
+#for PacBio raw read
 blasr ./SRR_hdf5/SRR.fofn hs37d5.fa -sa hs37d5.blasr.sa -clipping soft -sam -out SRR.sam
 
 #for alignment of error corrected reads
@@ -30,4 +30,10 @@ jellyfish count -m 26 -s 5G -t 10 -o jf.index.26kmers <(zcat ./ERR194147_1.fastq
 
 #for kmer counting
 jellyfish query jf.index.26kmers 26mer.list.in.reads >> count.26.NA12878.0824.txt
+```
+
+## PALMER
+```
+#Frozen vesion for the project at https://github.com/mills-lab/PALMER/releases/tag/V1.3.0
+PALMER --input ./alignment_hs37d5/NA12878.washu.alignment_hs37d5.${i}.bam --workdir ./chr${i}.line.1127.11.a/ --ref_ver GRCh37 --output NA12878.chr${i} --chr chr${i} --ref_fa ./reference/hs37d5/hs37d5.fa --type LINE
 ```
