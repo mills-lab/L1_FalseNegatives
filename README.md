@@ -1,4 +1,4 @@
-# Identification and characterization of cryptic human-specific LINE-1 insertions using long-read sequencing technology
+# Identification and Characterization of Occult Human-specific LINE-1 Insertions using Long-read Sequencing Technology
 ## BLASR
 ```
 #for PacBio raw read from Washington University
@@ -18,7 +18,7 @@ canu useGrid=false -correct -d ./region/canu.0510 -p region.date genomeSize=60k 
 #for NA12878 Illumina platimun data
 java -jar ./MELTv2.0.2/MELT.jar Single -l NA12878.bam  -w /workdir -t ./MELTv2.0.2/me_refs/1KGP_Hg19/LINE1_MELT.zip -h hs37d5.fa -n ./MELTv2.0.2/add_bed_files/1KGP_Hg19/hg19.genes.bed -c 49 -b hs37d5
 
-#for single-cell experiment (WGA59)
+#for single-cell experiment (scWGS59)
 java -jar ./MELTv2.0.2/MELT.jar Single -l 82759.bam -w /workdir -t ./MELTv2.0.2/me_refs/1KGP_Hg19/LINE1_MELT.zip -h hs37d5.fa -n ./MELTv2.0.2/add_bed_files/1KGP_Hg19/hg19.genes.bed -b hs37d5 -c 21
 ```
 
