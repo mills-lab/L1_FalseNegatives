@@ -55,4 +55,5 @@ samtools rmdup bwa.NA12878.trimmed.300.sorted.bam bwa.NA12878.trimmed.300.sorted
 samtools view bwa.NA12878.trimmed.300.sorted.rmdup.bam | awk '{print $1,$2,$3,$4,$5,$6}' > STEP3.region_call.txt
 g++ bpr_pull_0525.cpp -o bpr_pull_0525.o
 ./bash.calling.region.sh
+
 ```
