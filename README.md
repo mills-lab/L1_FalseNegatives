@@ -50,3 +50,9 @@ samtools view bwa.NA12878.trimmed.300.sorted.rmdup.bam | awk '{print $1,$2,$3,$4
 g++ bpr_pull_0525.cpp -o bpr_pull_0525.o
 ./bash.calling.region.sh
 ```
+
+## PALMER
+```
+#Frozen vesion for the project at https://github.com/mills-lab/PALMER/releases/tag/V1.3.0
+PALMER --input ./alignment_hs37d5/NA12878.washu.alignment_hs37d5.${i}.bam --workdir ./chr${i}.line.1127.11.a/ --ref_ver GRCh37 --output NA12878.chr${i} --chr chr${i} --ref_fa ./reference/hs37d5/hs37d5.fa --type LINE
+```
