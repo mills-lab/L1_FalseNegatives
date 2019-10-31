@@ -4,7 +4,7 @@
 #for PacBio raw read
 blasr ./SRR_hdf5/SRR.fofn hs37d5.fa -sa hs37d5.blasr.sa -clipping soft -sam -out SRR.sam
 
-#for alignment of error corrected reads
+#for alignment of error-corrected reads
 blasr ./correctedReads.fasta region.fa --sam --clipping soft --out region.sam 
 ```
 
