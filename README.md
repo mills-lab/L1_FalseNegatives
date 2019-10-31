@@ -4,7 +4,7 @@
 #for PacBio raw read
 blasr ./SRR_hdf5/SRR.fofn hs37d5.fa -sa hs37d5.blasr.sa -clipping soft -sam -out SRR.sam
 
-#for alignment of error corrected reads
+#for alignment of error-corrected reads
 blasr ./correctedReads.fasta region.fa --sam --clipping soft --out region.sam 
 ```
 
@@ -35,5 +35,25 @@ jellyfish query jf.index.26kmers 26mer.list.in.reads >> count.26.NA12878.0824.tx
 ## PALMER
 ```
 #Frozen vesion for the project at https://github.com/mills-lab/PALMER/releases/tag/V1.3.0
-PALMER --input ./alignment_hs37d5/NA12878.washu.alignment_hs37d5.${i}.bam --workdir ./chr${i}.line.1127.11.a/ --ref_ver GRCh37 --output NA12878.chr${i} --chr chr${i} --ref_fa ./reference/hs37d5/hs37d5.fa --type LINE
+PALMER --input ./alignment_hs37d5/NA12878.washu.alignment_hs37d5.${i}.bam --workdir ./chr${i}.line/ --ref_ver GRCh37 --output NA12878.chr${i} --chr chr${i} --ref_fa ./reference/hs37d5/hs37d5.fa --type LINE
+```
+
+## Pipelines for 3' targeted capture LINE-1 Illumina Miseq sequencing data
+```
+#Step1: Trimming (require the input.fastq that is going to be trimmed)
+g++ trimmer.cpp -o trimmer.o
+./trimmer.o
+
+#Step2: bwa-mem alignment
+bwa mem -t 15 hs37d5.fa R1_001.fastq R2_trimmed_gDNA.fastq > bwa.NA12878.trimmed.300.sam
+samtools view -Sb bwa.NA12878.trimmed.300.sam  > bwa.NA12878.trimmed.300.bam
+samtools sort -T /tmp/bwa.NA12878.trimmed.300.sorted -o bwa.NA12878.trimmed.300.sorted.bam bwa.NA12878.trimmed.300.bam
+samtools index bwa.NA12878.trimmed.300.sorted.bam
+
+#Step3: PCR duplicates removal and region calling
+samtools rmdup bwa.NA12878.trimmed.300.sorted.bam bwa.NA12878.trimmed.300.sorted.rmdup.bam
+samtools view bwa.NA12878.trimmed.300.sorted.rmdup.bam | awk '{print $1,$2,$3,$4,$5,$6}' > STEP3.region_call.txt
+g++ bpr_pull_0525.cpp -o bpr_pull_0525.o
+./bash.calling.region.sh
+
 ```
